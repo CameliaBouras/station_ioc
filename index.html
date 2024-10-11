@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Les valeurs recus des capteurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5; /* Light pink background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            color: #d147a3; /* Dark pink color */
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        span {
+            font-weight: bold;
+            color: #ff69b4; /* Hot pink color */
+        }
+        .container {
+            background-color: #ffe4e1; /* Misty rose background for container */
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .name {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1em;
+            color: #d147a3; /* Dark pink color */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const source = new EventSource('/events');
+            source.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                document.getElementById('luminosity').innerText = data.lum + '%$
+                document.getElementById('buttonState').innerText = data.btn;
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="name">BOURAS Camelia</div>
+    <div class="container">
+        <h1>Les valeurs des donnees des capteurs</h1>
+        <p>Luminosite: <span id="luminosity">0%</span></p>
+        <p>Etat du bouton: <span id="buttonState">0</span></p>
+    </div>
+</body>
+</html>
